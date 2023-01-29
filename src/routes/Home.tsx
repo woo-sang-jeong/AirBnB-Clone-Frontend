@@ -1,16 +1,13 @@
-import { Box, Grid, HStack, Skeleton, SkeletonText } from "@chakra-ui/react";
+import { Grid } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
 import { getRooms } from "../api";
 import Room from "../components/Room";
 import RoomSkeleton from "../components/RoomSkeleton";
-
 interface IPhoto {
   pk: string;
   file: string;
   description: string;
 }
-
 interface IRoom {
   pk: number;
   name: string;
@@ -21,7 +18,6 @@ interface IRoom {
   is_owner: boolean;
   photos: IPhoto[];
 }
-
 export default function Home() {
   const { isLoading, data } = useQuery<IRoom[]>(["rooms"], getRooms);
   return (
@@ -57,6 +53,8 @@ export default function Home() {
       ) : null}
       {data?.map((room) => (
         <Room
+          key={room.pk}
+          pk={room.pk}
           imageUrl={room.photos[0].file}
           name={room.name}
           rating={room.rating}

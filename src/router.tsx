@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Root from "./components/Root";
 import Home from "./routes/Home";
+import RoomDetail from "./routes/RoomDetail";
 import NotFound from "./routes/NotFound";
 
 const router = createBrowserRouter([
@@ -12,6 +13,10 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <Home />,
+      },
+      {
+        path: "rooms/:roompk",
+        element: <RoomDetail />,
       },
     ],
   },
