@@ -13,12 +13,12 @@ import { Link } from "react-router-dom";
 
 interface IRoomProps {
   imageUrl: string;
-  pk: number;
   name: string;
   rating: number;
   city: string;
   country: string;
   price: number;
+  pk: number;
 }
 
 export default function Room({
@@ -51,11 +51,8 @@ export default function Room({
             <Text display={"block"} as="b" noOfLines={1} fontSize="md">
               {name}
             </Text>
-            <HStack
-              _hover={{ color: "red.100" }}
-              spacing={1}
-              alignItems="center"
-            >
+
+            <HStack spacing={1} alignItems="center">
               <FaStar size={12} />
               <Text fontSize={"sm"}>{rating}</Text>
             </HStack>
