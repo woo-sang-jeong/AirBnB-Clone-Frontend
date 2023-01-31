@@ -1,6 +1,7 @@
 import {
   Avatar,
   Box,
+  Container,
   Grid,
   GridItem,
   Heading,
@@ -63,7 +64,7 @@ export default function RoomDetail() {
       <HStack w={"40%"} justifyContent={"space-between"} mt={10}>
         <VStack alignItems={"flex-start"}>
           <Skeleton isLoaded={!isLoading} height={"30px"}>
-            <Heading>House hosted by {data?.owner.name}</Heading>s
+            <Heading>House hosted by {data?.owner.name}</Heading>
           </Skeleton>
           <Skeleton isLoaded={!isLoading} height={"30px"}>
             <HStack justifyContent={"flex-start"} w="100%">
@@ -80,7 +81,7 @@ export default function RoomDetail() {
       </HStack>
       <Box mt={10}>
         <Skeleton isLoaded={!isReviewsLoading} height={"30px"}>
-          <Heading fontSize={"2xl"}>
+          <Heading mb={5} fontSize={"2xl"}>
             <HStack>
               <FaStar /> <Text>{data?.rating}</Text>
               <Text>·</Text>
@@ -91,6 +92,28 @@ export default function RoomDetail() {
             </HStack>
           </Heading>
         </Skeleton>
+        <Container mt={16} maxW="container.lg" marginX="none"></Container>
+        <Grid gap={10} templateColumns={"1fr 1fr"}>
+          {reviewsData?.map((review, index) => (
+            <VStack align={"flex-start"} key={index}>
+              <HStack>
+                <Avatar
+                  name={review.user.name}
+                  src={review.user.avatar}
+                  size="md"
+                />
+                <VStack spacing={0} align={"flex-start"}>
+                  <Heading fontSize={"md"}>{review.user.name}</Heading>
+                  <HStack spacing={1}>
+                    <FaStar size="12px" />
+                    <Text>{review.rating}</Text>
+                  </HStack>
+                </VStack>
+              </HStack>
+              <Text>{review.payload}</Text>
+            </VStack>
+          ))}
+        </Grid>
       </Box>
     </Box>
   );
