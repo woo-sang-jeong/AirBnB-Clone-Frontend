@@ -15,7 +15,7 @@ import { FaStar } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { getRoom, getRoomReviews } from "../api";
-import { IReview, IRoomDetail, IRoomPhoto } from "../types";
+import { IReview, IRoomDetail } from "../types";
 
 export default function RoomDetail() {
   const { roomPk } = useParams();
