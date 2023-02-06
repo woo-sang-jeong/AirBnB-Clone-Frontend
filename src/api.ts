@@ -8,7 +8,7 @@ const instance = axios.create({
 });
 
 export const getRooms = () =>
-  instance.get(`rooms/`).then((response) => response.data);
+  instance.get("rooms/").then((response) => response.data);
 
 export const getRoom = ({ queryKey }: QueryFunctionContext) => {
   const [_, roomPk] = queryKey;
@@ -75,14 +75,12 @@ export const usernameLogIn = ({
   username,
   password,
 }: IUsernameLoginVariables) =>
-  instance
-    .post(
-      `/users/log-in`,
-      { username, password },
-      {
-        headers: {
-          "X-CSRFToken": Cookie.get("csrftoken") || "",
-        },
-      }
-    )
-    .then((response) => response.data);
+  instance.post(
+    `/users/log-in`,
+    { username, password },
+    {
+      headers: {
+        "X-CSRFToken": Cookie.get("csrftoken") || "",
+      },
+    }
+  );
