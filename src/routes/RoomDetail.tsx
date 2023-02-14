@@ -18,7 +18,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { getRoom, getRoomReviews } from "../api";
 import { IReview, IRoomDetail } from "../types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function RoomDetail() {
   const { roomPk } = useParams();
@@ -26,8 +26,16 @@ export default function RoomDetail() {
   const { data: reviewsData, isLoading: isReviewsLoading } = useQuery<
     IReview[]
   >([`rooms`, roomPk, `reviews`], getRoomReviews);
-  const [dates, setDates] = useState<Date>();
-  console.log(dates);
+  const [dates, setDates] = useState<Date[]>();
+  useEffect(() => {
+    if (dates) {
+      // Date[]는 2개의 array를 받는데 firstDate, seconDate가 그 data를 받는다.
+      const [firstDate, secondDate] = dates;
+      const [checkIn] = firstDate.toJSON().split("T");
+      const [checkOut] = secondDate.toJSON().split("T");
+      console.log(checkIn, checkOut);
+    }
+  }, [dates]);
   return (
     <Box
       pb={40}
